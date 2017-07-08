@@ -155,6 +155,12 @@ var db2Close = () => {
     db2.close();
 };
 
+var dbCircle = (area, callback) => {
+    Data.circle('datas', area).exec((err, data) => {
+        callback(data);
+    });
+}
+
 module.exports = {
     'dataInsert': db1Insert,
     'dataDelete': db1Delete,
@@ -166,5 +172,5 @@ module.exports = {
     "userSearch": db2Search,
     "userUpdate": db2Update,
     "userClose": db2Close,
-    "Data": Data
+    "dbCircle": dbCircle
 };

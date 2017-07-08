@@ -128,7 +128,7 @@ app.post('/get', (req, res) => {
                     radius: req.body.radius,
                     unique: false
                 };
-                database.Data.query.circle('datas', area).exec((err, data) => {
+                database.dbCircle(area, (data) => {
                     console.log(data);
                     res.send(JSON.stringify(data));
                 });
