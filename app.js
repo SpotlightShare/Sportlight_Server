@@ -117,6 +117,7 @@ app.post('/modify', (req, res) => {
 });
 
 app.post('/get', (req, res) => {
+    console.log(req.body);
     if (req.body.token != undefined && req.body.id != undefined) {
         database.userSearch(req.body.id, (user) => {
             if (user.length < 1) return;
@@ -126,7 +127,6 @@ app.post('/get', (req, res) => {
                     radius: req.body.radius,
                     unique: false
                 };
-                console.log(req.body);
                 query.circle('datas', area).exec((err, data) => {
                     console.log(data);
                     res.send(JSON.stringify(data));
