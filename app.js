@@ -21,7 +21,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
          // render the error page
            res.status(err.status || 500);
-             res.send('{status:false}');
+             res.send(JSON.stringify({status:false}));
              });
 
 app.get('/register', (req, res) => {
@@ -29,16 +29,16 @@ app.get('/register', (req, res) => {
 });
 app.post('/register', (req, res) => {
    if (database.userSearch(req.body.email)) {
-       res.send({status: false})
+       res.send(JSON.stringify({status: false}));
    }
    else{
        var token = req.body.email + req.body.password;
        var username = req.body.username;
        database.userInsert(req.body, midUser, token);
        midUser += 1;
-       res.send({status: true,
+       res.send(JSON.stringify({status: true,
                  token: token,
-                  id: req.body.email})
+                  id: req.body.email}))
    }
 });
 app.get('/login', (req, res) => {
@@ -53,18 +53,18 @@ app.post('/login', (req, res) => {
     if (user) {
         if (user.password === password){
             var token = user.token;
-            res.send({status: true,
+            res.send(JSON.stringify({status: true,
                        token: token,
-                        id: id}.stringify())
+                        id: id}))
         }
         else {
-            res.send({status: false,
-                       detail: "password wrong"}.stringify())
+            res.send(JSON.stringify({status: false,
+                       detail: "password wrong"}))
         }
     }
     else {
-        res.send({status: false,
-                    detail: "id wrong"}.stringify())
+        res.send(JSON.stringify({status: false,
+                    detail: "id wrong"}.stringify()))
     }
 });
 
@@ -75,10 +75,10 @@ app.get('/editor', (req, res) => {
 app.post('/add', (req, res) => {
     if (req.body !== null) {
         database.dataInsert(req.body);
-        res.send({status: true});
+        res.send(JSON.stringify({status: true}));
     }
     else {
-        res.send({status: false});
+        res.send(JSON.stringify({status: false}));
     }
 });
 
@@ -88,10 +88,10 @@ app.post('/modify', (req, res) => {
 
         database.dataDelete(req.body.email);
         database.dataInsert(req.body);
-        res.send({status: true});
+        res.send(JSON.stringify({status: true}));
     }
     else {
-        res.send({status: false});
+        res.send(JSON.stringify({status: false}));
     }
 });
 
@@ -101,7 +101,7 @@ app.get('/get', (req, res) => {
         query.circle('datas', area);
     }
     else {
-        res.send({status: false})
+        res.send(JSON.stringify({status: false}));
     }
 });
 // catch 404 and forward to error handler
