@@ -1,4 +1,5 @@
 var mongoose = require('mongoose');
+var Query = mongoose.Query;
 
 
 var Schema = mongoose.Schema;
