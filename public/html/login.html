@@ -2,18 +2,20 @@
 <html lang="en">
 <head>
     <title>Title</title>
-    <link rel="stylesheet" href="../stylesheets/login.css" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <link rel="stylesheet" href="../css/login.css" />
+    <meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
 </head>
 <body>
-    <div class="logo"><img src="../images/256.png" /></div>
+  <div class="container">
+    <div class="logo"><img src="../css/256.png" width="160" height="160"/></div>
     <h1>欢迎来到SpotlightShare的世界！</h1>
-    <div class="container">
-        <input class="input" style="background: url('../../../../../Library/Containers/com.tencent.xinWeChat/Data/Library/Application Support/com.tencent.xinWeChat/2.0b4.0.9/22151f08d0edd1ca2f35eca8d44ce949/Message/MessageTemp/3634aec6dddbb1d18528f3134100fdda/File/登录页面/account.png') no-repeat 0;" placeholder="用户名" value="" />
-        <input class="input" style="background: url('../../../../../Library/Containers/com.tencent.xinWeChat/Data/Library/Application Support/com.tencent.xinWeChat/2.0b4.0.9/22151f08d0edd1ca2f35eca8d44ce949/Message/MessageTemp/3634aec6dddbb1d18528f3134100fdda/File/登录页面/password.png') no-repeat 0;" type="password" placeholder="密码" value="" />
+
+        <input id="email" class="input" style="background: url('../css/account.png') no-repeat 0;" placeholder="邮箱" value="" />
+        <input id="password" class="input"  style="background: url('../css/password.png') no-repeat 0;" type="password" placeholder="密码" value="" />
         <br />
-        <div class="login">登录</div>
+        <a href="javascript:login()"><div class="login">登录</div></a>
         <a href="../register"><div class="register">没有账号？注册 >></div></a>
-    </div>
+  </div>
+  <script src="../js/index.js"></script>
 </body>
 </html>
