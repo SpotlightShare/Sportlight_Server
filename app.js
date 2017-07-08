@@ -117,11 +117,9 @@ app.post('/modify', (req, res) => {
 });
 
 app.post('/get', (req, res) => {
-    console.log(req.body);
     if (req.body.token != undefined && req.body.id != undefined) {
         database.userSearch(req.body.id, (user) => {
             if (user.length < 1) return;
-            console.log(req.body.token + ':' + user[0].token);
             if (req.body.token == user[0].token) {
                 var area = {
                     center: [req.body.position.lo, req.body.position.la],

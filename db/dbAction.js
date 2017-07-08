@@ -133,7 +133,6 @@ var db2Search = (id, callback) => {
             console.log("ERR: " + err)
         }
         else {
-            //console.log(result);
             callback(result);
         }
     })
@@ -157,10 +156,19 @@ var db2Close = () => {
 };
 
 var dbCircle = (area, callback) => {
-    var query = new Query();
-    query.circle('Data', area).exec((err, data) => {
-        callback(data);
-    });
+    User.find({}, (err, result) => {
+        if (err) {
+            console.log("ERR: " + err)
+        }
+        else {
+            console.log(result);
+            callback(result);
+        }
+    })
+    // var query = new Query();
+    // query.circle('Data', area).exec((err, data) => {
+    //     callback(data);
+    // });
 }
 
 module.exports = {
