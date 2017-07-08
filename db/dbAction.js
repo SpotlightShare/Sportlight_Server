@@ -131,7 +131,7 @@ var db2Search = (id, callback) => {
             console.log("ERR: " + err)
         }
         else {
-            console.log(result);
+            //console.log(result);
             callback(result);
         }
     })

@@ -29,7 +29,8 @@ app.get('/register', (req, res) => {
 });
 app.post('/register', (req, res) => {
     database.userSearch(req.body.email, (user) => {
-        if (user) {
+        if (user === []) {
+            console.log(user);
             res.send(JSON.stringify({status: false}));
         }
         else {
@@ -53,13 +54,17 @@ app.post('/login', (req, res) => {
    var id = req.body.email;
    var password = req.body.password;
    database.userSearch(id, (user) => {
-       console.log(user);
-       if (user) {
-           if (user.password === password){
-               var token = user.token;
+       console.log(user[0]);
+       if (user && user.length === 1) {
+           if (user[0].password === password){
+               var token = user[0].token;
                res.send(JSON.stringify({status: true,
                    token: token,
                    id: id}))
+           }
+           else if(user.length > 1){
+               res.send(JSON.stringify({status: true,
+                                        detail: "Same ID"}))
            }
            else {
                res.send(JSON.stringify({status: false,
@@ -113,7 +118,7 @@ app.post('/get', (req, res) => {
         }
 
     });
-}
+})
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   var err = new Error('Not Found');
