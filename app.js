@@ -117,7 +117,7 @@ app.post('/modify', (req, res) => {
 });
 
 app.post('/get', (req, res) => {
-    if (req.body.hasOwnProperty("token") && req.body.hasOwnProperty("id")) {
+    if (req.body.token != undefined && req.body.id != undefined) {
         database.userSearch(req.body.id, (user) => {
             if (req.body.token === user[0].token) {
                 var area = {
