@@ -117,11 +117,11 @@ app.post('/modify', (req, res) => {
 });
 
 app.post('/get', (req, res) => {
-    if ( "token" in req.body) {
-        database.userSearch(req.body.email, (user) => {
+    if (req.body.hasOwnProperty("token") && req.body.hasOwnProperty("id")) {
+        database.userSearch(req.body.id, (user) => {
             if (req.body.token === user[0].token) {
                 var area = {
-                    center: [req.body.position.la, req.body.position.lo],
+                    center: [req.body.position.lo, req.body.position.la],
                     radius: req.body.radius,
                     unique: false
                 };
