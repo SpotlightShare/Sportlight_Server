@@ -26,7 +26,7 @@ var user = new Schema({
    id: Schema.Types.String,
    password: Schema.Types.String,
    token: Schema.Types.String,
-   register: Schema.Types.Number,
+   register: Schema.Types.Date,
    priority: Schema.Types.Number,
     mid: Schema.Types.Number
 });
@@ -100,7 +100,7 @@ var db2Insert = (recData, mid, token) => {
         id: recData.email,
         password: recData.password,
         token: token,
-        register: recData.register,
+        register: Date.now(),
         priority: 1,
         mid: mid
     });
@@ -125,14 +125,14 @@ var db2Delete = (id) => {
     })
 };
 
-var db2Search = (id) => {
+var db2Search = (id, callback) => {
     User.find({id: id}, (err, result) => {
         if (err) {
             console.log("ERR: " + err)
         }
         else {
             console.log(result);
-            return result;
+            callback(result);
         }
     })
 };

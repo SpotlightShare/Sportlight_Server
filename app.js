@@ -28,18 +28,22 @@ app.get('/register', (req, res) => {
    res.sendFile(__dirname + '/public/html/register.html');
 });
 app.post('/register', (req, res) => {
-   if (database.userSearch(req.body.email)) {
-       res.send(JSON.stringify({status: false}));
-   }
-   else{
-       var token = req.body.email + req.body.password;
-       var username = req.body.username;
-       database.userInsert(req.body, midUser, token);
-       midUser += 1;
-       res.send(JSON.stringify({status: true,
-                 token: token,
-                  id: req.body.email}))
-   }
+    database.userSearch(req.body.email, (user) => {
+        if (user) {
+            res.send(JSON.stringify({status: false}));
+        }
+        else {
+            var token = req.body.email + req.body.password;
+            var username = req.body.username;
+            database.userInsert(req.body, midUser, token);
+            midUser += 1;
+            res.send(JSON.stringify({
+                status: true,
+                token: token,
+                id: req.body.email
+            }))
+        }
+    })
 });
 app.get('/login', (req, res) => {
     res.sendFile(__dirname + "/public/html/login.html");
@@ -48,24 +52,25 @@ app.get('/login', (req, res) => {
 app.post('/login', (req, res) => {
    var id = req.body.email;
    var password = req.body.password;
-   var user = database.userSearch(id);
-    console.log(user)
-    if (user) {
-        if (user.password === password){
-            var token = user.token;
-            res.send(JSON.stringify({status: true,
-                       token: token,
-                        id: id}))
-        }
-        else {
-            res.send(JSON.stringify({status: false,
-                       detail: "password wrong"}))
-        }
-    }
-    else {
-        res.send(JSON.stringify({status: false,
-                    detail: "id wrong"}))
-    }
+   database.userSearch(id, (user) => {
+       console.log(user);
+       if (user) {
+           if (user.password === password){
+               var token = user.token;
+               res.send(JSON.stringify({status: true,
+                   token: token,
+                   id: id}))
+           }
+           else {
+               res.send(JSON.stringify({status: false,
+                   detail: "password wrong"}))
+           }
+       }
+       else {
+           res.send(JSON.stringify({status: false,
+               detail: "id wrong"}))
+       }
+   });
 });
 
 app.get('/editor', (req, res) => {
@@ -96,14 +101,19 @@ app.post('/modify', (req, res) => {
 });
 
 app.post('/get', (req, res) => {
-    if (req.body.token === database.userSearch(req.body.email).token) {
-        var area = { center: [req.body.data.x, req.body.data.y], radius: req.body.radius, unique: false };
-        query.circle('datas', area);
-    }
-    else {
-        res.send(JSON.stringify({status: false}));
-    }
-});
+    database.userSearch(req.body.email, (user) => {
+        if (req.body.token === user.token) {
+            var area = {center: [req.body.data.x, req.body.data.y], radius: req.body.radius, unique: false};
+            query.circle('datas', area).exec((err, data) => {
+                res.send(JSON.stringify(data));
+            });
+        }
+        else {
+            res.send(JSON.stringify({status: false}));
+        }
+
+    });
+}
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   var err = new Error('Not Found');
