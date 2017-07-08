@@ -33,6 +33,9 @@ app.post('/register', (req, res) => {
             console.log(user);
             res.send(JSON.stringify({status: false}));
         }
+        else if (user.length > 1) {
+            res.send(JSON.stringify({status: false}));
+        }
         else {
             var token = req.body.email + req.body.password;
             var username = req.body.username;
@@ -107,7 +110,8 @@ app.post('/modify', (req, res) => {
 
 app.post('/get', (req, res) => {
     database.userSearch(req.body.email, (user) => {
-        if (req.body.token === user.token) {
+        console.log(req.body.token, user[0].token);
+        if (req.body.token === user[0].token) {
             var area = {center: [req.body.data.x, req.body.data.y], radius: req.body.radius, unique: false};
             query.circle('datas', area).exec((err, data) => {
                 res.send(JSON.stringify(data));
