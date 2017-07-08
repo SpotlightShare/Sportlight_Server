@@ -65,7 +65,7 @@ app.post('/login', (req, res) => {
                var token = user[0].token;
                res.send(JSON.stringify({status: true,
                    token: token,
-                   id: username}))
+                   username: username}))
            }
            else if(user.length > 1){
                res.send(JSON.stringify({status: false,
@@ -118,7 +118,6 @@ app.post('/modify', (req, res) => {
 
 app.post('/get', (req, res) => {
     if (req.body !== null) {
-        console(req.body);
         database.userSearch(req.body.email, (user) => {
             console.log(req.body.token, user[0].token);
             if (req.body.token === user[0].token) {
