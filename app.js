@@ -117,9 +117,8 @@ app.post('/modify', (req, res) => {
 });
 
 app.post('/get', (req, res) => {
-    if (req.body !== null) {
+    if ( "token" in req.body) {
         database.userSearch(req.body.email, (user) => {
-            console.log(req.body.token, user[0].token);
             if (req.body.token === user[0].token) {
                 var area = {
                     center: [req.body.position.la, req.body.position.lo],
