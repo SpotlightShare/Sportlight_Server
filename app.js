@@ -127,8 +127,11 @@ app.post('/get', (req, res) => {
                     unique: false
                 };
                 database.dbCircle(area, (data) => {
-                    console.log(data);
-                    res.send(JSON.stringify(data));
+                    var myData = {
+                        status: true,
+                        data: data
+                    };
+                    res.send(JSON.stringify(myData));
                 });
             }
             else {
