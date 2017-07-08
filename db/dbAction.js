@@ -156,7 +156,8 @@ var db2Close = () => {
 };
 
 var dbCircle = (area, callback) => {
-    Data.circle('datas', area).exec((err, data) => {
+    var query = new Query();
+    query.circle('datas', area).exec((err, data) => {
         callback(data);
     });
 }
