@@ -119,7 +119,8 @@ app.post('/modify', (req, res) => {
 app.post('/get', (req, res) => {
     if (req.body.token != undefined && req.body.id != undefined) {
         database.userSearch(req.body.id, (user) => {
-            if (req.body.token === user[0].token) {
+            if (user.length < 1) return;
+            if (req.body.token == user[0].token) {
                 var area = {
                     center: [req.body.position.lo, req.body.position.la],
                     radius: req.body.radius,
