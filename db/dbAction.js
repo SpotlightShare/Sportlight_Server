@@ -22,7 +22,7 @@ var data = new Schema({
 });
 
 var user = new Schema({
-    email: Schema.Types.String,
+    username: Schema.Types.String,
    id: Schema.Types.String,
    password: Schema.Types.String,
    token: Schema.Types.String,
@@ -96,7 +96,8 @@ var db1Close = () => {
 
 var db2Insert = (recData, mid, token) => {
     var user = new User({
-        id: recData.id,
+        email: recData.username,
+        id: recData.email,
         password: recData.password,
         token: token,
         register: recData.register,

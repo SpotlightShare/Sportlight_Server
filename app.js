@@ -24,16 +24,17 @@ app.get('/register', (req, res) => {
    res.sendFile(__dirname + '/public/html/register.html');
 });
 app.post('/register', (req, res) => {
-   if (database.userSearch(req.body.username)) {
+   if (database.userSearch(req.body.email)) {
        res.send({status: false})
    }
    else{
-       var token = req.body.username + req.body.password;
+       var token = req.body.email + req.body.password;
+       var username = req.body.username;
        database.userInsert(req.body, midUser, token);
        midUser += 1;
        res.send({status: true,
                  token: token,
-                  id: req.body.username})
+                  id: req.body.email})
    }
 });
 app.get('/login', (req, res) => {
@@ -41,7 +42,7 @@ app.get('/login', (req, res) => {
 });
 
 app.post('/login', (req, res) => {
-   var id = req.body.username;
+   var id = req.body.email;
    var password = req.body.password;
     var user = database.userSearch(id)[0];
     if (user) {
@@ -80,7 +81,7 @@ app.post('/modify', (req, res) => {
     if (req.body !== null) {
         var myCata = {};
 
-        database.dataDelete(req.body.username);
+        database.dataDelete(req.body.email);
         database.dataInsert(req.body);
         res.send({status: true});
     }
@@ -90,7 +91,7 @@ app.post('/modify', (req, res) => {
 });
 
 app.get('/get', (req, res) => {
-    if (req.body.token === database.userSearch(req.body.username).token) {
+    if (req.body.token === database.userSearch(req.body.email).token) {
         var area = { center: [req.body.data.x, req.body.data.y], radius: req.body.radius, unique: false };
         query.circle('datas', area);
     }
