@@ -1,8 +1,6 @@
 var express = require('express');
 var path = require('path');
-var database = require('/db/dbAction');
-var index = require('./routes/index');
-var users = require('./routes/users');
+var database = require('./db/dbAction');
 
 var app = express();
 
@@ -11,8 +9,19 @@ var midUser = 0;
 
 app.use(express.static(path.join(__dirname, 'public')));
 
+// error handler
+ app.use(function(err, req, res, next) {
+   // set locals, only providing error in development
+        res.locals.message = err.message;
+        res.locals.error = req.app.get('env') === 'development' ? err : {};
+
+         // render the error page
+           res.status(err.status || 500);
+             res.send('{status:false}');
+             });
+
 app.get('/register', (req, res) => {
-   res.sendFile('../public/html/register.html');
+   res.sendFile(__dirname + '/public/html/register.html');
 });
 app.post('/register', (req, res) => {
    if (database.userSearch(req.body.id)) {
@@ -28,7 +37,7 @@ app.post('/register', (req, res) => {
    }
 });
 app.get('/login', (req, res) => {
-    res.sendFile("../public/html/login.html");
+    res.sendFile(__dirname + "/public/html/login.html");
 });
 
 app.post('/login', (req, res) => {
@@ -89,16 +98,5 @@ app.use(function(req, res, next) {
   next(err);
 });
 
-// error handler
-app.use(function(err, req, res, next) {
-  // set locals, only providing error in development
-  res.locals.message = err.message;
-  res.locals.error = req.app.get('env') === 'development' ? err : {};
 
-  // render the error page
-  res.status(err.status || 500);
-  res.render('error');
-});
-
-
-module.exports = app;
+app.listen(3389);
