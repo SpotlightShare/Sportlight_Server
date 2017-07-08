@@ -15,11 +15,14 @@ mydb.dataInsert({
     id: 12
 }, 12);
 mydb.userInsert({
-    id: "123",
-    password: "123",
+    username:"hey",
+    id: "1233",
+    password: "1s23",
     token: "!23",
     register: 1,
     priority: 2,
-}, 12);
+}, 12, "123");
+id = "1233";
+mydb.userSearch(id);
 mydb.dataClose();
 mydb.userClose();

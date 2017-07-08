@@ -22,7 +22,7 @@ var data = new Schema({
 });
 
 var user = new Schema({
-    username: Schema.Types.String,
+    email: Schema.Types.String,
    id: Schema.Types.String,
    password: Schema.Types.String,
    token: Schema.Types.String,

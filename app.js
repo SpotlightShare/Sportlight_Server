@@ -46,10 +46,10 @@ app.get('/login', (req, res) => {
 });
 
 app.post('/login', (req, res) => {
-    console.log(req);
    var id = req.body.email;
    var password = req.body.password;
-    var user = database.userSearch(id);
+   var user = database.userSearch(id);
+    console.log(user)
     if (user) {
         if (user.password === password){
             var token = user.token;
@@ -64,7 +64,7 @@ app.post('/login', (req, res) => {
     }
     else {
         res.send(JSON.stringify({status: false,
-                    detail: "id wrong"}.stringify()))
+                    detail: "id wrong"}))
     }
 });
 
@@ -95,7 +95,7 @@ app.post('/modify', (req, res) => {
     }
 });
 
-app.get('/get', (req, res) => {
+app.post('/get', (req, res) => {
     if (req.body.token === database.userSearch(req.body.email).token) {
         var area = { center: [req.body.data.x, req.body.data.y], radius: req.body.radius, unique: false };
         query.circle('datas', area);
@@ -111,4 +111,4 @@ app.use(function(req, res, next) {
   next(err);
 });
 
-app.listen(3389);
+app.listen(3000);
