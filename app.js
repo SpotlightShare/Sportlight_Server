@@ -95,7 +95,9 @@ app.post('editor', (req, res) => {
 
 app.post('/add', (req, res) => {
     if (req.body !== null) {
-        database.dataInsert(req.body);
+        console.log(midData);
+        database.dataInsert(req.body, midData);
+        midData += 1;
         res.send(JSON.stringify({status: true}));
     }
     else {
