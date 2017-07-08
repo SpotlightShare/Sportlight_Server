@@ -116,19 +116,25 @@ app.post('/modify', (req, res) => {
 });
 
 app.post('/get', (req, res) => {
-    database.userSearch(req.body.email, (user) => {
-        console.log(req.body.token, user[0].token);
-        if (req.body.token === user[0].token) {
-            var area = {center: [req.body.position.la, req.body.position.lo], radius: req.body.radius, unique: false};
-            query.circle('datas', area).exec((err, data) => {
-                res.send(JSON.stringify(data));
-            });
-        }
-        else {
-            res.send(JSON.stringify({status: false}));
-        }
+    if (req.body !== null) {
+        database.userSearch(req.body.email, (user) => {
+            console.log(req.body.token, user[0].token);
+            if (req.body.token === user[0].token) {
+                var area = {
+                    center: [req.body.position.la, req.body.position.lo],
+                    radius: req.body.radius,
+                    unique: false
+                };
+                query.circle('datas', area).exec((err, data) => {
+                    res.send(JSON.stringify(data));
+                });
+            }
+            else {
+                res.send(JSON.stringify({status: false}));
+            }
 
-    });
+        });
+    }
 });
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
