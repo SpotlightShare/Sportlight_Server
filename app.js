@@ -1,4 +1,5 @@
 var express = require('express');
+var body = require('body-parser');
 var path = require('path');
 var database = require('./db/dbAction');
 
@@ -6,7 +7,10 @@ var app = express();
 
 var midData = 0;
 var midUser = 0;
+app.use(bodyParser.urlencoded({ extended: false }));
 
+
+app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, 'public')));
 
 // error handler
@@ -42,6 +46,7 @@ app.get('/login', (req, res) => {
 });
 
 app.post('/login', (req, res) => {
+    console.log(req);
    var id = req.body.email;
    var password = req.body.password;
     var user = database.userSearch(id)[0];
