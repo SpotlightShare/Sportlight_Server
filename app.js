@@ -1,5 +1,5 @@
 var express = require('express');
-var body = require('body-parser');
+var bodyParser = require('body-parser');
 var path = require('path');
 var database = require('./db/dbAction');
 
@@ -49,22 +49,22 @@ app.post('/login', (req, res) => {
     console.log(req);
    var id = req.body.email;
    var password = req.body.password;
-    var user = database.userSearch(id)[0];
+    var user = database.userSearch(id);
     if (user) {
         if (user.password === password){
             var token = user.token;
             res.send({status: true,
                        token: token,
-                        id: id})
+                        id: id}.stringify())
         }
         else {
             res.send({status: false,
-                       detail: "password wrong"})
+                       detail: "password wrong"}.stringify())
         }
     }
     else {
         res.send({status: false,
-                    detail: "id wrong"})
+                    detail: "id wrong"}.stringify())
     }
 });
 
