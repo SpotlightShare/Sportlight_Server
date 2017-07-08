@@ -121,13 +121,14 @@ app.post('/get', (req, res) => {
     if (req.body.token != undefined && req.body.id != undefined) {
         database.userSearch(req.body.id, (user) => {
             if (user.length < 1) return;
+            console.log(req.body.token + ':' + user[0].token);
             if (req.body.token == user[0].token) {
                 var area = {
                     center: [req.body.position.lo, req.body.position.la],
                     radius: req.body.radius,
                     unique: false
                 };
-                query.circle('datas', area).exec((err, data) => {
+                database.Data.query.circle('datas', area).exec((err, data) => {
                     console.log(data);
                     res.send(JSON.stringify(data));
                 });

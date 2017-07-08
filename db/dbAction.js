@@ -1,5 +1,6 @@
 var mongoose = require('mongoose');
 
+
 var Schema = mongoose.Schema;
 mongoose.Promise = global.Promise;
 
@@ -164,5 +165,6 @@ module.exports = {
     "userDelete": db2Delete,
     "userSearch": db2Search,
     "userUpdate": db2Update,
-    "userClose": db2Close
+    "userClose": db2Close,
+    "Data": Data
 };
