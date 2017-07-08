@@ -156,7 +156,7 @@ var db2Close = () => {
 };
 
 var dbCircle = (area, callback) => {
-    User.find({}, (err, result) => {
+    Data.find({}, (err, result) => {
         if (err) {
             console.log("ERR: " + err)
         }
