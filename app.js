@@ -56,13 +56,13 @@ app.get('/login', (req, res) => {
 
 app.post('/login', (req, res) => {
    var id = req.body.email;
-   var username = req.body.username;
    var password = req.body.password;
    database.userSearch(id, (user) => {
        console.log(user[0]);
        if (user && user.length === 1) {
            if (user[0].password === password){
                var token = user[0].token;
+               var username = user[0].username;
                res.send(JSON.stringify({status: true,
                    token: token,
                    username: username}))
