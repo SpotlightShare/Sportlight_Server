@@ -64,14 +64,14 @@ var db1Delete = (id) => {
     })
 };
 
-var db1Search = (id) => {
-    Data.find({id: id}, (err, result) => {
+var db1Search = (id, callback) => {
+    User.find({id: id}, (err, result) => {
         if (err) {
             console.log("ERR: " + err)
         }
         else {
-            console.log(result);
-            return result;
+            //console.log(result);
+            callback(result);
         }
     })
 };

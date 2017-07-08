@@ -3,6 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="6aabb8c7-6766-46b0-9365-11ebff4ade58" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app.js" afterPath="$PROJECT_DIR$/app.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db/dbAction.js" afterPath="$PROJECT_DIR$/db/dbAction.js" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -19,8 +20,8 @@
             <file leaf-file-name="dbAction.js" pinned="false" current-in-tab="true">
               <entry file="file://$PROJECT_DIR$/db/dbAction.js">
                 <provider selected="true" editor-type-id="text-editor">
-                  <state relative-caret-position="576">
-                    <caret line="133" column="14" lean-forward="false" selection-start-line="133" selection-start-column="14" selection-end-line="133" selection-end-column="14" />
+                  <state relative-caret-position="381">
+                    <caret line="66" column="7" lean-forward="false" selection-start-line="66" selection-start-column="7" selection-end-line="66" selection-end-column="7" />
                     <folding />
                   </state>
                 </provider>
@@ -59,8 +60,8 @@
       <file leaf-file-name="app.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="313">
-              <caret line="112" column="49" lean-forward="false" selection-start-line="112" selection-start-column="49" selection-end-line="112" selection-end-column="49" />
+            <state relative-caret-position="511">
+              <caret line="123" column="47" lean-forward="true" selection-start-line="123" selection-start-column="47" selection-end-line="123" selection-end-column="47" />
               <folding />
             </state>
           </provider>
@@ -126,6 +127,7 @@
       <find>dataSearch</find>
       <find>console</find>
       <find>Search</find>
+      <find>dataIn</find>
     </findStrings>
     <replaceStrings>
       <replace>email</replace>
@@ -274,12 +276,12 @@
       <workItem from="1499493420527" duration="22000" />
       <workItem from="1499493465329" duration="1737000" />
       <workItem from="1499506899618" duration="68000" />
-      <workItem from="1499541495240" duration="1756000" />
+      <workItem from="1499541495240" duration="4292000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="11898000" />
+    <option name="totallyTimeSpent" value="14434000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="55" y="63" width="1385" height="837" extended-state="0" />
@@ -608,16 +610,16 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/db/dbAction.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="576">
-          <caret line="133" column="14" lean-forward="false" selection-start-line="133" selection-start-column="14" selection-end-line="133" selection-end-column="14" />
+        <state relative-caret-position="381">
+          <caret line="66" column="7" lean-forward="false" selection-start-line="66" selection-start-column="7" selection-end-line="66" selection-end-column="7" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="313">
-          <caret line="112" column="49" lean-forward="false" selection-start-line="112" selection-start-column="49" selection-end-line="112" selection-end-column="49" />
+        <state relative-caret-position="511">
+          <caret line="123" column="47" lean-forward="true" selection-start-line="123" selection-start-column="47" selection-end-line="123" selection-end-column="47" />
           <folding />
         </state>
       </provider>

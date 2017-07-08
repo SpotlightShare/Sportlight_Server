@@ -2,6 +2,7 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var path = require('path');
 var database = require('./db/dbAction');
+var fs = require('fs');
 
 var app = express();
 
@@ -54,7 +55,7 @@ app.get('/login', (req, res) => {
 });
 
 app.post('/login', (req, res) => {
-   var id = req.body.email;
+   var id = req.body.username;
    var password = req.body.password;
    database.userSearch(id, (user) => {
        console.log(user[0]);
@@ -66,7 +67,7 @@ app.post('/login', (req, res) => {
                    id: id}))
            }
            else if(user.length > 1){
-               res.send(JSON.stringify({status: true,
+               res.send(JSON.stringify({status: false,
                                         detail: "Same ID"}))
            }
            else {
@@ -83,6 +84,12 @@ app.post('/login', (req, res) => {
 
 app.get('/editor', (req, res) => {
     res.sendFile(__dirname + "/public/html/editor.html")
+});
+
+app.post('editor', (req, res) => {
+    if (req.body.type == 1) {
+        fs.writeFile()
+    }
 });
 
 app.post('/add', (req, res) => {
@@ -112,7 +119,7 @@ app.post('/get', (req, res) => {
     database.userSearch(req.body.email, (user) => {
         console.log(req.body.token, user[0].token);
         if (req.body.token === user[0].token) {
-            var area = {center: [req.body.data.x, req.body.data.y], radius: req.body.radius, unique: false};
+            var area = {center: [req.body.position.la, req.body.position.lo], radius: req.body.radius, unique: false};
             query.circle('datas', area).exec((err, data) => {
                 res.send(JSON.stringify(data));
             });
@@ -122,7 +129,7 @@ app.post('/get', (req, res) => {
         }
 
     });
-})
+});
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   var err = new Error('Not Found');
